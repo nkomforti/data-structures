@@ -16,13 +16,13 @@ def unique_houses(filename):
 
     houses = set()
 
-    cohort_data = open(filename)
-    for line in cohort_data:
-        line = line.rstrip()
-        data = line.split("|")
+    with open(filename) as cohort_data:
+        for line in cohort_data:
+            line = line.rstrip()
+            data = line.split("|")
 
-        if data[2] != "":
-            houses.add(data[2])
+            if data[2] != "":
+                houses.add(data[2])
 
     return houses
 
@@ -107,7 +107,41 @@ def hogwarts_by_house(filename):
     ghosts = []
     instructors = []
 
-    # Code goes here
+    # Automatically closes the file at the end of the for loop.
+    with open(filename) as cohort_data:
+
+        for line in cohort_data:
+            line = line.rstrip()
+            data = line.split("|")
+
+            if data[4] == 'G':
+                ghosts.append(data[1])
+
+            elif data[4] == 'I':
+                instructors.append(data[1])
+
+            elif data[2] == 'Gryffindor':
+                gryffindor.append(data[1])
+
+            elif data[2] == 'Hufflepuff':
+                hufflepuff.append(data[1])
+
+            elif data[2] == 'Slytherin':
+                slytherin.append(data[1])
+
+            elif data[2] == 'Ravenclaw':
+                ravenclaw.append(data[1])
+
+            elif data[2] == 'Dumbledore\'s Army':
+                dumbledores_army.append(data[1])
+
+    all_students = [sorted(gryffindor),
+                    sorted(slytherin),
+                    sorted(hufflepuff),
+                    sorted(ravenclaw),
+                    sorted(dumbledores_army),
+                    sorted(ghosts),
+                    sorted(instructors)]
 
     return all_students
 
